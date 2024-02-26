@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+// default font-size is 16px, this sets 1 rem to 8px
+html {
+    font-size: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+input,
+button,
+dialog {
+    border: none;
+}
