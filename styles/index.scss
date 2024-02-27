@@ -1,3 +1,21 @@
 @use './partials/variables' as *;
 @use './partials/mixins' as *;
 @use './partials/global' as *;
+
+.body {
+    &__tablet-hidden {
+        @include tablet {
+            display: none;
+        }
+    }
+}
+
+.sidebar {
+    &__mobile-hidden {
+        display: none;
+
+        @include tablet {
+            display: block;
+        }
+    }
+}

@@ -20,4 +20,19 @@ input,
 button,
 dialog {
   border: none;
+}
+
+@media screen and (min-width: 768px) {
+  .body__tablet-hidden {
+    display: none;
+  }
+}
+
+.sidebar__mobile-hidden {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .sidebar__mobile-hidden {
+    display: block;
+  }
 }/*# sourceMappingURL=index.css.map */
