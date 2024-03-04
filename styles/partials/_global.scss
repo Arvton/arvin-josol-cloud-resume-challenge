@@ -11,6 +11,14 @@ html {
 
 a {
     text-decoration: none;
+
+    &:visited {
+        color: #0000EE;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 ul {
