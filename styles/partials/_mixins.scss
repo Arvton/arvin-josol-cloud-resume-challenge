@@ -44,6 +44,7 @@
 //border mixins
 @mixin section-border-bottom {
     border-bottom: solid 0.25rem #ff914d;
+    margin-bottom: 2rem;
 }
 
 @mixin full-border-radius {
