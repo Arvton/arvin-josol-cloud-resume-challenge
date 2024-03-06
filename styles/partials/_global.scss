@@ -11,6 +11,15 @@ html {
 
 a {
     text-decoration: none;
+    color: #5271ff;
+
+    &:visited {
+        color: #5271ff;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 ul {
