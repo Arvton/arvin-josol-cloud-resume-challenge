@@ -45,6 +45,10 @@
 @mixin section-border-bottom {
     border-bottom: solid 0.25rem #ffbd59;
     margin-bottom: 2rem;
+
+    @include tablet {
+        border-bottom: dotted 0.25rem #ffbd59;
+    }
 }
 
 @mixin full-border-radius {
