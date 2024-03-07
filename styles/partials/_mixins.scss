@@ -58,3 +58,7 @@
 @mixin box-shadow {
     box-shadow: 0rem 0rem 2.5rem 0rem black;
 }
+
+@mixin box-shadow-hover {
+    box-shadow: 0rem 0rem 2.5rem 0rem #7394A1;
+}
