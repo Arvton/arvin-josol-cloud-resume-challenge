@@ -34,9 +34,15 @@ This isn’t normally part of the challenge but I want to incorporate what I kno
 
 ## 4. Static Website
 
-## 5. HTTPS
+The website is hosted as a static website on an Azure storage account. Simpler hosting solutions like Netlify and Azure Static Web Apps were avoided to increase the learning opportunity.
+
+## 5. HTTPS + CDN
+
+The challenge website uses Microsoft CDN (classic). I created a CDN profile and endpoint.  The CDN endpoint uses a custom domain, TLS, a CDN managed certificate, and a rule to redirect HTTP request to HTTPS.
 
 ## 6. DNS
+
+I added a CNAME record for the CDN endpoint on DigitalOcean where I manage my DNS records.
 
 ## 7. JavaScript
 
