@@ -1,6 +1,10 @@
 # Cloud Resume Challenge — Arvin Josol
 
-This is the project repository for my Cloud Resume Challenge.  I am going through the challenge to make further use of my knowledge and skills from the cloud certifications I have earned. 
+The live website for this challenge can be found here: [Arvin Josol - Cloud Challenge Resume](https://resume.arvinjosol.ca/)
+
+This is the project repository for the frontend of my Cloud Resume Challenge.  Here is the repo for the backend: [Arvin CRC backend](https://github.com/Arvton/arvin-josol-cloud-resume-backend)
+
+I am going through the challenge to make further use of my knowledge and skills from the cloud certifications I have earned. 
 
 Through my workplace, I get to build my experience with cloud solutions professionally. I want to further boost my skills by making my own cloud-based projects.  
 
@@ -48,9 +52,17 @@ I added a CNAME record for the CDN endpoint on DigitalOcean where I manage my DN
 
 ## 8. Database
 
+The challenge recommends using CosmosDB for Tables to store the value for a visitor counter. It is deployed in a serverless capacity to reduce the cost. The value increments when the page is loaded.
+
 ## 9. API
 
-## 10. Python
+This part makes use of an Azure Function App to run the Function that will connect to the CosmosDB table and update the visitor count.
+
+Once the function was deployed to the app, I tested it in three ways: executing it manually in VS Code, hitting the API URL on Postman, and on page load for the live page.
+
+## 10. More JavaScript
+
+The original challenge recommends writing the Azure Function code in Python to increase your breadth of experience. I used more JavaScript to gain more depth of experience. As a web developer bootcamp grad, I want to build on my existing knowledge of node.js.
 
 ## 11. Tests
 
