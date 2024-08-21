@@ -164,12 +164,14 @@ main {
     &__accordion {
         @include archivo-narrow;
         font-size: 1.5rem;
+        font-style: italic;
         padding-bottom: 1rem;
     }
 
     &__text {
         @include archivo;
         font-size: 2rem;
+        padding-bottom: 0.5rem;
 
         & li {
             padding-bottom: 0.5rem;

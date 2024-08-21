@@ -220,6 +220,7 @@ main {
   font-style: normal;
   font-variation-settings: "wdth" 87.5;
   font-size: 1.5rem;
+  font-style: italic;
   padding-bottom: 1rem;
 }
 .experience__text {
@@ -229,6 +230,7 @@ main {
   font-style: normal;
   font-variation-settings: "wdth" 100;
   font-size: 2rem;
+  padding-bottom: 0.5rem;
 }
 .experience__text li {
   padding-bottom: 0.5rem;
