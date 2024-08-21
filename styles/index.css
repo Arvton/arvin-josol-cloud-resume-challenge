@@ -213,6 +213,15 @@ main {
   font-size: 1.5rem;
   padding-bottom: 1rem;
 }
+.experience__accordion {
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 87.5;
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
 .experience__text {
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;

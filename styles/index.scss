@@ -161,6 +161,12 @@ main {
         padding-bottom: 1rem;
     }
 
+    &__accordion {
+        @include archivo-narrow;
+        font-size: 1.5rem;
+        padding-bottom: 1rem;
+    }
+
     &__text {
         @include archivo;
         font-size: 2rem;
