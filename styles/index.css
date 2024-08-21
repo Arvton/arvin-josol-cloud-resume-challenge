@@ -223,6 +223,9 @@ main {
   font-style: italic;
   padding-bottom: 1rem;
 }
+.experience__accordion:hover {
+  cursor: pointer;
+}
 .experience__text {
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;

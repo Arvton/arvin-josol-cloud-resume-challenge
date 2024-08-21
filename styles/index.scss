@@ -166,6 +166,10 @@ main {
         font-size: 1.5rem;
         font-style: italic;
         padding-bottom: 1rem;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     &__text {
