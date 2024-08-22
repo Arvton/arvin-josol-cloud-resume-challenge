@@ -283,15 +283,6 @@ main {
 .certifications__text li {
   padding-bottom: 0.5rem;
 }
-.certifications__date {
-  font-family: "Archivo", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-variation-settings: "wdth" 87.5;
-  font-size: 1.5rem;
-  padding-bottom: 1rem;
-}
 
 .projects {
   background-color: whitesmoke;

@@ -218,12 +218,6 @@ main {
             padding-bottom: 0.5rem;
         }
     }
-
-    &__date {
-        @include archivo-narrow;
-        font-size: 1.5rem;
-        padding-bottom: 1rem;
-    }
 }
 
 .projects {
