@@ -20,10 +20,10 @@ const cloudResumeDetails = document.getElementById('cloud-resume-details');
 const cloudResumeSummary = document.getElementById('cloud-resume-summary');
 
 cloudResumeDetails.addEventListener('toggle', () => {
-    if (cloudResumeDetails.closed) {
-        cloudResumeSummary.innerText = summaryLabels.closed;
-    } else {
+    if (cloudResumeDetails.open) {
         cloudResumeSummary.innerText = summaryLabels.open;
+    } else {
+        cloudResumeSummary.innerText = summaryLabels.closed;
     }
 });
 
