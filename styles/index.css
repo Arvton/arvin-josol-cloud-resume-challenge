@@ -326,6 +326,19 @@ main {
   font-size: 2rem;
   padding-bottom: 0.5rem;
 }
+.projects__accordion {
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 87.5;
+  font-size: 1.5rem;
+  font-style: italic;
+  padding-bottom: 1rem;
+}
+.projects__accordion:hover {
+  cursor: pointer;
+}
 .projects__text {
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
