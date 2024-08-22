@@ -28,13 +28,13 @@ cloudResumeDetails.addEventListener('toggle', () => {
 });
 
 // code for mini paint challenge accordion. a listener looks for a toggle to change the text.
-const miniPaintChellengeDetails = document.getElementById('mini-paint-challenge-details');
-const miniPaintChellengeSummary = document.getElementById('mini-paint-challenge-summary');
+const miniPaintChallengeDetails = document.getElementById('mini-paint-challenge-details');
+const miniPaintChallengeSummary = document.getElementById('mini-paint-challenge-summary');
 
-miniPaintChellengeDetails.addEventListener('toggle', () => {
-    if (miniPaintChellengeDetails.open) {
-        miniPaintChellengeSummary.innerText = summaryLabels.open;
+miniPaintChallengeDetails.addEventListener('toggle', () => {
+    if (miniPaintChallengeDetails.open) {
+        miniPaintChallengeSummary.innerText = summaryLabels.open;
     } else {
-        miniPaintChellengeSummary.innerText = summaryLabels.closed;
+        miniPaintChallengeSummary.innerText = summaryLabels.closed;
     }
 });
