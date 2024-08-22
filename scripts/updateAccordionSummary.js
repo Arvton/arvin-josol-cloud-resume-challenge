@@ -1,17 +1,16 @@
-// Get the details element
-const detailsElement = document.querySelector('details');
+const summaryLabels = {
+    open: 'Collapse to hide details',
+    closed: 'Expand to view details'
+}
 
-// Get the summary element
-const summaryElement = detailsElement.querySelector('summary');
+// code for military experience accordion. a listener looks for a toggle to change the text.
+const militaryDetails = document.getElementById('military-details');
+const militarySummary = document.getElementById('military-summary');
 
-// Add event listener to the details element
-detailsElement.addEventListener('toggle', () => {
-    // Check if the details element is open
-    if (detailsElement.open) {
-        // Clear the text content of the summary element
-        summaryElement.innerText = 'Collapse to hide details';
+militaryDetails.addEventListener('toggle', () => {
+    if (militaryDetails.open) {
+        militarySummary.innerText = summaryLabels.open;
     } else {
-        // Set the text content of the summary element
-        summaryElement.innerText = 'Expand to view details';
+        militarySummary.innerText = summaryLabels.closed;
     }
 });
