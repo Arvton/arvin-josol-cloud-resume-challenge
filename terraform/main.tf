@@ -8,11 +8,21 @@ terraform {
       source  = "hashicorp/random"
       version = "~>3.0"
     }
+    digitalocean = {
+      source  = "digitalocean/digitalocean"
+      version = "~> 2.0"
+    }
   }
 }
 
+variable "do_token" {}
+
 provider "azurerm" {
   features {}
+}
+
+provider "digitalocean" {
+  token = var.do_token
 }
 
 resource "azurerm_resource_group" "crc-test-terraform" {
@@ -168,6 +178,9 @@ resource "azurerm_cdn_endpoint" "cdn-ep-crc-test" {
 }
 
 # Add DNS here?
+resource "digitalocean_domain" "arvinjosol" {
+  name = "arvinjosol.ca"
+}
 
 resource "azurerm_cdn_endpoint_custom_domain" "cdn-ep-cd-crc-test" {
   name            = "custom-domain-test" # where is this used?
