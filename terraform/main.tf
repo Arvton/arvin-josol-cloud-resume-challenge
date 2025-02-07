@@ -15,7 +15,10 @@ terraform {
   }
 }
 
-variable "do_token" {}
+variable "do_token" {
+  type      = string
+  sensitive = true
+}
 
 provider "azurerm" {
   features {}
@@ -25,16 +28,31 @@ provider "digitalocean" {
   token = var.do_token
 }
 
+resource "random_string" "test-randomizer" {
+  length  = 7
+  lower   = true
+  numeric = false
+  special = false
+  upper   = false
+}
+
+resource "digitalocean_record" "terraform" {
+  domain = "arvinjosol.ca"
+  type   = "CNAME"
+  name   = random_string.test-randomizer.result
+  value  = "${azurerm_cdn_endpoint.cdn-ep-crc-test.fqdn}."
+}
+
 resource "azurerm_resource_group" "crc-test-terraform" {
-  name     = "crc-test-terraform"
+  name     = "rg-crc-${random_string.test-randomizer.result}"
   location = "Canada Central"
   tags = {
     environment = "test"
   }
 }
 
-resource "azurerm_storage_account" "sa2-crc-test" {
-  name                     = "sa2crctest"
+resource "azurerm_storage_account" "sa-crc-test" {
+  name                     = "sacrc${random_string.test-randomizer.result}"
   resource_group_name      = azurerm_resource_group.crc-test-terraform.name
   location                 = azurerm_resource_group.crc-test-terraform.location
   account_tier             = "Standard"
@@ -44,9 +62,7 @@ resource "azurerm_storage_account" "sa2-crc-test" {
     index_document     = "index.html"
     error_404_document = "404.html"
   }
-  custom_domain {
-    name = "terraform.arvinjosol.ca"
-  }
+
   tags = {
     environment = "test"
   }
@@ -56,7 +72,7 @@ resource "azurerm_storage_blob" "blob-crc-scripts-test" {
   for_each = fileset(path.module, "../scripts/*")
 
   name                   = trim(each.key, "../")
-  storage_account_name   = azurerm_storage_account.sa2-crc-test.name
+  storage_account_name   = azurerm_storage_account.sa-crc-test.name
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "text/javascript"
@@ -65,7 +81,7 @@ resource "azurerm_storage_blob" "blob-crc-scripts-test" {
 
 resource "azurerm_storage_blob" "blob-crc-styles-index-test" {
   name                   = "styles/index.css"
-  storage_account_name   = azurerm_storage_account.sa2-crc-test.name
+  storage_account_name   = azurerm_storage_account.sa-crc-test.name
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "text/css"
@@ -74,7 +90,7 @@ resource "azurerm_storage_blob" "blob-crc-styles-index-test" {
 
 resource "azurerm_storage_blob" "blob-crc-styles-assets-test" {
   name                   = "styles/assets/icons/new-tab.png"
-  storage_account_name   = azurerm_storage_account.sa2-crc-test.name
+  storage_account_name   = azurerm_storage_account.sa-crc-test.name
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "image/png"
@@ -83,7 +99,7 @@ resource "azurerm_storage_blob" "blob-crc-styles-assets-test" {
 
 resource "azurerm_storage_blob" "blob-crc-index-test" {
   name                   = "index.html"
-  storage_account_name   = azurerm_storage_account.sa2-crc-test.name
+  storage_account_name   = azurerm_storage_account.sa-crc-test.name
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "text/html"
@@ -92,7 +108,7 @@ resource "azurerm_storage_blob" "blob-crc-index-test" {
 
 resource "azurerm_storage_blob" "blob-crc-404-test" {
   name                   = "404.html"
-  storage_account_name   = azurerm_storage_account.sa2-crc-test.name
+  storage_account_name   = azurerm_storage_account.sa-crc-test.name
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "text/html"
@@ -100,8 +116,8 @@ resource "azurerm_storage_blob" "blob-crc-404-test" {
 }
 
 resource "azurerm_cdn_profile" "cdn-profile-crc-test" {
-  name                = "cdn-profile-crc-test"
-  location            = azurerm_resource_group.crc-test-terraform.location
+  name                = "prof-${random_string.cdn-ep-name.result}"
+  location            = "global"
   resource_group_name = azurerm_resource_group.crc-test-terraform.name
   sku                 = "Standard_Microsoft"
 
@@ -110,7 +126,7 @@ resource "azurerm_cdn_profile" "cdn-profile-crc-test" {
   }
 }
 
-resource "random_string" "azurerm_cdn_endpoint_name" {
+resource "random_string" "cdn-ep-name" {
   length  = 13
   lower   = true
   numeric = false
@@ -119,9 +135,9 @@ resource "random_string" "azurerm_cdn_endpoint_name" {
 }
 
 resource "azurerm_cdn_endpoint" "cdn-ep-crc-test" {
-  name                          = "endpoint-${random_string.azurerm_cdn_endpoint_name.result}"
+  name                          = "ep-${random_string.cdn-ep-name.result}"
   profile_name                  = azurerm_cdn_profile.cdn-profile-crc-test.name
-  location                      = azurerm_resource_group.crc-test-terraform.location
+  location                      = "global"
   resource_group_name           = azurerm_resource_group.crc-test-terraform.name
   is_http_allowed               = true
   is_https_allowed              = true
@@ -171,21 +187,21 @@ resource "azurerm_cdn_endpoint" "cdn-ep-crc-test" {
     "text/x-java-source",
   ]
 
+  origin_host_header = azurerm_storage_account.sa-crc-test.primary_web_host
   origin {
     name      = "origin"
-    host_name = "sa2crctest.z9.web.core.windows.net"
+    host_name = azurerm_storage_account.sa-crc-test.primary_web_host
+  }
+  
+  tags = {
+    environment = "test"
   }
 }
 
-# Add DNS here?
-resource "digitalocean_domain" "arvinjosol" {
-  name = "arvinjosol.ca"
-}
-
 resource "azurerm_cdn_endpoint_custom_domain" "cdn-ep-cd-crc-test" {
-  name            = "custom-domain-test" # where is this used?
+  name            = random_string.test-randomizer.result # where is this used?
   cdn_endpoint_id = azurerm_cdn_endpoint.cdn-ep-crc-test.id
-  host_name       = "terraform.arvinjosol.ca" #the custom domain I want to use
+  host_name       = digitalocean_record.terraform.fqdn #the custom domain I want to use
 
   cdn_managed_https {
     certificate_type = "Dedicated"
