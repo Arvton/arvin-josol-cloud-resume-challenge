@@ -126,14 +126,6 @@ resource "azurerm_cdn_profile" "cdn-profile-crc-test" {
   }
 }
 
-# resource "random_string" "cdn-ep-name" {
-#   length  = 13
-#   lower   = true
-#   numeric = false
-#   special = false
-#   upper   = false
-# }
-
 resource "azurerm_cdn_endpoint" "cdn-ep-crc-test" {
   name                          = "ep-${random_string.test-randomizer.result}"
   profile_name                  = azurerm_cdn_profile.cdn-profile-crc-test.name
@@ -192,7 +184,7 @@ resource "azurerm_cdn_endpoint" "cdn-ep-crc-test" {
     name      = "origin"
     host_name = azurerm_storage_account.sa-crc-test.primary_web_host
   }
-  
+
   tags = {
     environment = "test"
   }
