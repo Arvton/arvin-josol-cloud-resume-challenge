@@ -116,7 +116,7 @@ resource "azurerm_storage_blob" "blob-crc-404-test" {
 }
 
 resource "azurerm_cdn_profile" "cdn-profile-crc-test" {
-  name                = "prof-${random_string.cdn-ep-name.result}"
+  name                = "prof-${random_string.test-randomizer.result}"
   location            = "global"
   resource_group_name = azurerm_resource_group.crc-test-terraform.name
   sku                 = "Standard_Microsoft"
@@ -126,16 +126,16 @@ resource "azurerm_cdn_profile" "cdn-profile-crc-test" {
   }
 }
 
-resource "random_string" "cdn-ep-name" {
-  length  = 13
-  lower   = true
-  numeric = false
-  special = false
-  upper   = false
-}
+# resource "random_string" "cdn-ep-name" {
+#   length  = 13
+#   lower   = true
+#   numeric = false
+#   special = false
+#   upper   = false
+# }
 
 resource "azurerm_cdn_endpoint" "cdn-ep-crc-test" {
-  name                          = "ep-${random_string.cdn-ep-name.result}"
+  name                          = "ep-${random_string.test-randomizer.result}"
   profile_name                  = azurerm_cdn_profile.cdn-profile-crc-test.name
   location                      = "global"
   resource_group_name           = azurerm_resource_group.crc-test-terraform.name
